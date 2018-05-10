@@ -2,6 +2,7 @@
 var app;
 var http = require('http');
 var express = require('express');
+
 var port = 3000;
 var chostName = 'localhost';
 
@@ -28,6 +29,8 @@ http.createServer(app).listen(port);
 
 // Create Path to Pages
 createGets(getPath);
+
+
 
 
 // Console manual information

@@ -37,8 +37,7 @@ $(function(){
 		if (team != ''){
 			input.attr('placeholder', team);
 			url = 'https://api.flickr.com/services/feeds/photos_public.gne?tags=' + team + '&format=json&jsoncallback=?'
-			photoRow.empty();
-			getPhoto(url);
+			photoRow.fadeOut(250, function(){photoRow.empty(); getPhoto(url); photoRow.fadeIn();});
 		}
 	});
 
@@ -52,7 +51,7 @@ $(function(){
 	
 
 	var photoContainer = $('<div class="container">');
-	var photoRow = $('<div class="row">');
+	var photoRow = $('<div class="row d-flex flex-row justify-content-stretch">');
 	var delay = 500;
 	var maxDelay = 1500;
 
@@ -64,9 +63,9 @@ $(function(){
 		$('body').append(photoContainer);
 		$(photoContainer).append(photoRow);
 		response.items.forEach(function(item){
-			var col = $('<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">');
+			var col = $('<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 d-flex flex-column align-items-stretch align-self-stretch align-content-stretch justify-content-stretch">');
 			
-			var a = $('<a href="' + item.link + '" class="fancybox">');
+			var a = $('<a href="' + item.link + '">');
 			$(photoRow).append(col);
 			var img = $('<img class="img-fluid mx-auto d-block">');
 			img.attr('src', item.media.m);
@@ -74,9 +73,10 @@ $(function(){
 				marginBottom: '10px'
 			});
 
-			var itemContainer = $('<div>').hide();
+			var itemContainer = $('<div class="d-flex flex-column justify-content-between itemContainer">').hide();
 			itemContainer.css({
-				marginBottom: '30px'
+				marginBottom: '30px',
+				height: '100%'
 			});
 			
 			if (item.title == '' || item.title == null || item.title == undefined || item.title == ' '){
@@ -114,7 +114,4 @@ $(function(){
 		});
 	});
 	}
-	
-
-	//$(".fancybox").fancybox();
 });
